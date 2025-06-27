@@ -104,3 +104,10 @@ One route can have multiple route handlers like shown below
 Whenever you make an api call, it basically goes through a middleware chain and finally goes to the request handler which send us the response
 
 Difference between app.use() and app.all()
+
+Order of arguments: 1st is the error,2nd is the request,3rd is the response,4th is the next
+app.use("/admin",(err,req,res,next)=>{
+    if(err){
+        res.status(500).send("Something went wrong")
+    }
+})

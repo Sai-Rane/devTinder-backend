@@ -7,7 +7,6 @@ const { adminAuth, userAuth } = require("./middlewares/auth");
 // handle auth middleware for all http requests
 // we will use app.use for writing middleware, because anything starting from /admin will go throught this handler. We are writing this middleware fo all requests because i want all my requests to be authorized
 app.use("/admin", adminAuth);
-app.use("/user", userAuth);
 
 app.use("/user/login", (req, res) => {
   res.send("User logged in successfully");
