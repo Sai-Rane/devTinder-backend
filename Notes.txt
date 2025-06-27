@@ -32,7 +32,7 @@ Open POSTMAN
 Create a Workspace
 Create a Collection(Collection is like a collection of api's)
 
-42min - app.use() matches all the HTTP methods API calls 
+42min - app.use() matches all the HTTP methods API calls. With app.use it handles all types of http methods
 app.get("/user",(req,res)=>{
     
 })  this will only handle GET call to /user
@@ -69,3 +69,38 @@ Advanced routing
 -----------------------------------------------------------------
 
 Episode 5
+
+One route can have multiple route handlers like shown below
+
+    app.use(
+    "/user",
+    (req, res) => {
+        //route handler 1
+        res.send("response 1");
+    },
+    (req, res) => {
+        //route handler 2
+        res.send("response 2");
+    }
+    );
+
+    Use next() when you want to call the second route handler
+    app.use(
+    "/user",
+    (req, res, next) => {
+        //route handler 1
+
+        next();
+        res.send("response 1");
+    },
+    (req, res) => {
+        //route handler 2
+
+        res.send("response 2");
+    }
+    );
+
+42 min - Middlewares
+Whenever you make an api call, it basically goes through a middleware chain and finally goes to the request handler which send us the response
+
+Difference between app.use() and app.all()
