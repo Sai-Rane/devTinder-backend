@@ -2,21 +2,21 @@ const express = require("express");
 
 const app = express(); //instance of express js application
 
-//the below function is known as the request handler for "/"
-app.use("/",(req,res)=>{
-    res.send("hello from the dashboard")
-})
+//the below function is known as the request handler for "/user"
+app.get("/user", (req, res) => {
+  res.send({
+    firstName: "John",
+    lastName: "Doe",
+  });
+});
 
-//the below function is known as the request handler for "/test"
-app.use("/test",(req,res)=>{
-    console.log("test")
-    res.send("test from the server")
-})
+app.post("/user", (req, res) => {
+  res.send("User created");
+});
 
-//the below function is known as the request handler for "/hello"
-app.use("/hello",(req,res)=>{
-    res.send("hello hello")
-})
+app.delete("/user", (req, res) => {
+  res.send("User deleted");
+});
 
 app.listen(7777, () => {
   console.log("Server is running on port 7777");
