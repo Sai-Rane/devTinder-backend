@@ -4,18 +4,18 @@ const app = express(); //instance of express js application
 
 //the below function is known as the request handler for "/user"
 app.get("/user", (req, res) => {
+  console.log(req.query);
+  console.log(req.params);
   res.send({
     firstName: "John",
     lastName: "Doe",
   });
 });
 
-app.post("/user", (req, res) => {
-  res.send("User created");
-});
-
-app.delete("/user", (req, res) => {
-  res.send("User deleted");
+// : means its a dynamic route
+app.get("/user/:id", (req, res) => {
+  console.log(req.params);
+  res.send("ab?c");
 });
 
 app.listen(7777, () => {
