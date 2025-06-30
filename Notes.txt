@@ -111,3 +111,26 @@ app.use("/admin",(err,req,res,next)=>{
         res.status(500).send("Something went wrong")
     }
 })
+
+---------------------------------------
+
+season 2 episode 6
+To connect to the Database we will be using Mongoose
+
+In the cluster there can be multiple Databases
+Collection(Table)
+
+Once you have established a successfull connection to your Database then you should listen to the port
+
+What is a Schema in a Database???
+Schema is a blueprint of a collection, What all things are required to create a user
+
+We will create schema using mongoose
+
+In the models - We define what all fields the user collection will have
+
+Once you have created a Schema , we create a mongoose model, by writing mongoose.model(name of the model,schema)
+
+Whenever you are saving/getting a data on database, all the methods returns you a promise
+
+Database then Collection then Document.There can be multiple documents inside a Collection
