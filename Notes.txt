@@ -182,3 +182,7 @@ https://mongoosejs.com/docs/api/model.html
 Model.find() - returns all the documents from the collection
 Model.findOne() - returns the first document from the collection
 Model.findById() - returns the document with the given id
+
+1hr 6min - patch and put
+
+1hr 16min - If it is not present in the schema it will not be added in the Database. Any other data which is apart from schema will be ignored by the API's

@@ -37,13 +37,35 @@ app.get("/user", async (req, res) => {
 });
 
 //feed api - to get all the users from the database
-app.get("/feed", async(req, res) => {
-  
+app.get("/feed", async (req, res) => {
   try {
-    const users=await User.find({})
-    res.send(users)
+    const users = await User.find({});
+    res.send(users);
   } catch (error) {
-    res.sendStatus(400).send("Error fetching users")
+    res.sendStatus(400).send("Error fetching users");
+  }
+});
+
+// api for deleting a user
+app.delete("/user", async (req, res) => {
+  const userId = req.body.userId;
+  try {
+    const user = await User.findByIdAndDelete(userId);
+    res.send("User deleted successfully");
+  } catch (error) {
+    res.status(400).send("Error deleting user");
+  }
+});
+
+// api to update a user
+app.patch("/user", async (req, res) => {
+  const userId = req.body.userId;
+  const data = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(userId, data);
+    res.send("User updated successfully");
+  } catch (error) {
+    res.status(400).send("Error updating user");
   }
 });
 
