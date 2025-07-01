@@ -10,13 +10,40 @@ app.post("/signup", async (req, res) => {
   console.log(req.body);
 
   //creating a new instance of the user model
-  const user=new User(req.body)
+  const user = new User(req.body);
 
   try {
-    await user.save()
-    res.send("User created")
+    await user.save();
+    res.send("User created");
   } catch (error) {
-    res.status(400).send("Error creating user")
+    res.status(400).send("Error creating user");
+  }
+});
+
+//get user by email
+app.get("/user", async (req, res) => {
+  const userEmail = req.body.emailId;
+
+  try {
+    const users = await User.find({ emailId: userEmail });
+    if (users.length === 0) {
+      res.status(400).send("User not found");
+    } else {
+      res.send(users);
+    }
+  } catch (error) {
+    res.status(400).send("Error fetching user");
+  }
+});
+
+//feed api - to get all the users from the database
+app.get("/feed", async(req, res) => {
+  
+  try {
+    const users=await User.find({})
+    res.send(users)
+  } catch (error) {
+    res.sendStatus(400).send("Error fetching users")
   }
 });
 

@@ -138,30 +138,30 @@ Database then Collection then Document.There can be multiple documents inside a 
 app.js
 
     const express = require("express");
-const { connectDB } = require("./config/database");
-const User = require("./models/user");
+    const { connectDB } = require("./config/database");
+    const User = require("./models/user");
 
-const app = express(); //instance of express js application
+    const app = express(); //instance of express js application
 
-app.post("/signup",async (req, res) => {
-  const user = new User({
-    firstName: "Katrina",
-    lastName: "kaif",
-    emailId: "katrina@yopmail.com",
-    password: "123456",
-  }); //creating a new instance of User model
+    app.post("/signup",async (req, res) => {
+    const user = new User({
+        firstName: "Katrina",
+        lastName: "kaif",
+        emailId: "katrina@yopmail.com",
+        password: "123456",
+    }); //creating a new instance of User model
 
-  try {
-    await user.save();  // this will save dummy data in database
-    res.send("User created");
-  } catch (error) {
-    res.status(400).send("Error creating user");
-  }
+    try {
+        await user.save();  // this will save dummy data in database
+        res.send("User created");
+    } catch (error) {
+        res.status(400).send("Error creating user");
+    }
 
-});
+    });
 
-connectDB()
-  .then(() => {
+    connectDB()
+    .then(() => {
     console.log("Connected to the database");
 
     //listen to the port after successfull connection to the database
@@ -176,3 +176,9 @@ connectDB()
 
 Season 2 episode 7
 express json middleware - converts json object to javascript object
+
+these all methods are available on the mongoose model, check documentation 
+https://mongoosejs.com/docs/api/model.html
+Model.find() - returns all the documents from the collection
+Model.findOne() - returns the first document from the collection
+Model.findById() - returns the document with the given id
