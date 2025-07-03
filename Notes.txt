@@ -186,3 +186,14 @@ Model.findById() - returns the document with the given id
 1hr 6min - patch and put
 
 1hr 16min - If it is not present in the schema it will not be added in the Database. Any other data which is apart from schema will be ignored by the API's
+
+--------------------------------------------------
+
+Season 2 episode 8
+Adding validation in schema such as required , unique , default , lowercase etc
+
+23min - how to create a custom validation function, just write a function called as validate.
+The validate function works perfect when you are inserting a new document but not when you are updating a document
+
+35 min - Adding timestamps 
+Pass {timestamps:true} while cretaing the schema
