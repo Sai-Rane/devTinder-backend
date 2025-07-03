@@ -197,3 +197,8 @@ The validate function works perfect when you are inserting a new document but no
 
 35 min - Adding timestamps 
 Pass {timestamps:true} while cretaing the schema
+
+47 min - API level validations
+
+1hr 9 min - Applying validation using the npm package validator
+
