@@ -202,3 +202,10 @@ Pass {timestamps:true} while cretaing the schema
 
 1hr 9 min - Applying validation using the npm package validator
 
+--------------------------------------------------
+
+Season 2 episode 9
+Whenever a user signs up, the first thing we should do is validation of data, after validating we should encrypt the password and then save it in database
+
+15min - To encrypt password we will use a package bcrypt
+

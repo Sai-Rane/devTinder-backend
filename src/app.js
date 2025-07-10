@@ -1,22 +1,53 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const User = require("./models/user");
+const { validateSignUpData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 const app = express(); //instance of express js application
 
 app.use(express.json());
 
 app.post("/signup", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
+
+  //Validation of data
+  validateSignUpData(req);
+
+  const { firstName, lastName, emailId, password } = req.body;
+
+  //Encrypt the password
+  const passwordHash = await bcrypt.hash(password, 10);
+  console.log("passwordHash", passwordHash);
 
   //creating a new instance of the user model
-  const user = new User(req.body);
+  const user = new User({
+    firstName,
+    lastName,
+    emailId,
+    password: passwordHash,
+  }); //only the fields passed in this object will be saved in DB
+
+  // const user=User.create(req.body)
 
   try {
     await user.save();
     res.send("User created");
   } catch (error) {
-    res.status(400).send("Error creating user");
+    res.status(400).send("ERROR:" + error.message);
+  }
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { emailId, password } = req.body;
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      "$2b$10$skA0eeWSHLWOoMXh8ng3hOJDjAk8BE2Jw4PzIJ2AG6VQTb8Rf6rZG"
+    );
+  } catch (error) {
+    res.status(400).send("Error logging in");
   }
 });
 
@@ -53,6 +84,7 @@ app.delete("/user", async (req, res) => {
     const user = await User.findByIdAndDelete(userId);
     res.send("User deleted successfully");
   } catch (error) {
+    console.log("error", error);
     res.status(400).send("Error deleting user");
   }
 });
