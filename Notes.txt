@@ -200,6 +200,8 @@ Pass {timestamps:true} while cretaing the schema
 
 47 min - API level validations
 
+59 min 30 sec - Using id in url for updating users data and accessing the userId using params
+
 1hr 9 min - Applying validation using the npm package validator
 
 --------------------------------------------------

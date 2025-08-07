@@ -20,6 +20,9 @@ app.post("/signup", async (req, res) => {
   const passwordHash = await bcrypt.hash(password, 10);
   console.log("passwordHash", passwordHash);
 
+  // earlier the instance was like this
+  // const user = new User(req.body);
+
   //creating a new instance of the user model
   const user = new User({
     firstName,
@@ -42,21 +45,29 @@ app.post("/login", async (req, res) => {
   try {
     const { emailId, password } = req.body;
 
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      "$2b$10$skA0eeWSHLWOoMXh8ng3hOJDjAk8BE2Jw4PzIJ2AG6VQTb8Rf6rZG"
-    );
+    const user = await User.findOne({ emailId: emailId });
+    if (!user) {
+      throw new Error("Incorrect EmailId");
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (isPasswordValid) {
+      res.send("Login Successfull");
+    } else {
+      throw new Error("Incorrect Password");
+    }
   } catch (error) {
-    res.status(400).send("Error logging in");
+    res.status(400).send("Error logging in " + error.message);
   }
 });
 
 //get user by email
 app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId;
+  console.log("userEmail", userEmail);
 
   try {
-    const users = await User.find({ emailId: userEmail });
+    const users = await User.find({ emailId: userEmail }); //.find method will return all the users with the given emailId
     if (users.length === 0) {
       res.status(400).send("User not found");
     } else {
