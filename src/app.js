@@ -3,14 +3,16 @@ const { connectDB } = require("./config/database");
 const User = require("./models/user");
 const { validateSignUpData } = require("./utils/validation");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const { userAuth } = require("./middlewares/auth");
 
 const app = express(); //instance of express js application
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
-  // console.log(req.body);
-
   //Validation of data
   validateSignUpData(req);
 
@@ -18,7 +20,6 @@ app.post("/signup", async (req, res) => {
 
   //Encrypt the password
   const passwordHash = await bcrypt.hash(password, 10);
-  console.log("passwordHash", passwordHash);
 
   // earlier the instance was like this
   // const user = new User(req.body);
@@ -52,6 +53,17 @@ app.post("/login", async (req, res) => {
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (isPasswordValid) {
+      const token = await user.getJWT();
+
+      // you can set a cookie using res.cookie
+      res.cookie(
+        "token",
+        token,
+        {
+          expires: new Date(Date.now() + 8 * 3600000),
+        },
+        { httpOnly: true }
+      );
       res.send("Login Successfull");
     } else {
       throw new Error("Incorrect Password");
@@ -61,10 +73,27 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/profile", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    res.send(user);
+  } catch (error) {
+    res.status(400).send("Error logging in " + error.message);
+  }
+});
+
+app.post("/sendConnectionRequets", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    res.send(user.firstName + " sent the connection request");
+  } catch (error) {
+    res.status(400).send("Error sending connection request" + error.message);
+  }
+});
+
 //get user by email
 app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId;
-  console.log("userEmail", userEmail);
 
   try {
     const users = await User.find({ emailId: userEmail }); //.find method will return all the users with the given emailId
@@ -95,7 +124,6 @@ app.delete("/user", async (req, res) => {
     const user = await User.findByIdAndDelete(userId);
     res.send("User deleted successfully");
   } catch (error) {
-    console.log("error", error);
     res.status(400).send("Error deleting user");
   }
 });

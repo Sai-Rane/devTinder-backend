@@ -211,3 +211,20 @@ Whenever a user signs up, the first thing we should do is validation of data, af
 
 15min - To encrypt password we will use a package bcrypt
 
+--------------------------------------------------
+
+Season 2 Episode 10
+
+You cannot access some pages without loggin in 
+When you make a login request after verifying the emal and password the server sends back a authentication token(JWT)
+This JWT is wrapped inside Cookie and the Cookie is sent to the user(client), you can also set an expiry to the cookie
+
+24 min - To read the cookie we need a cookie parser
+
+32 min - JWT token has 3 parts - One is header, payload ans signature
+We use a package to generate the jwt
+We use .sign method to generate the token
+
+1hr 22 min - How to set expiry time on your JWT
+
+1hr 37 min - Mongoose Schema Methods
