@@ -225,6 +225,27 @@ This JWT is wrapped inside Cookie and the Cookie is sent to the user(client), yo
 We use a package to generate the jwt
 We use .sign method to generate the token
 
+Token is expired/invalid means we need to login again so that the token gets generated
+
 1hr 22 min - How to set expiry time on your JWT
 
+1hr 28 min - Expiring a cookie
+
 1hr 37 min - Mongoose Schema Methods
+
+---------------------------------------------------
+
+Season 2 Episode 11
+
+21 min
+Handling routing using proper way i.e by using Express Router
+
+
+example:
+auth router will handle
+-POST /signup
+-POST /login
+
+profile router will handle
+-GET /profile/view
+-PATCH /profile/edit
