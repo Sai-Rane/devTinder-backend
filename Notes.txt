@@ -123,7 +123,8 @@ Collection(Table)
 Once you have established a successfull connection to your Database then you should listen to the port
 
 What is a Schema in a Database???
-Schema is a blueprint of a collection, What all things are required to create a user
+Schema is a blueprint of a collection, What all things are required to create a user.
+Creating a User schema means what all things a user will have. example: name, id,email, password etc
 
 We will create schema using mongoose
 
