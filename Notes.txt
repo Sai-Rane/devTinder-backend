@@ -210,6 +210,9 @@ Pass {timestamps:true} while cretaing the schema
 --------------------------------------------------
 
 Season 2 episode 9
+
+What's the purpose of writing code in try catch block, if anything fails in the try block the catch block will catch the error
+
 Whenever a user signs up, the first thing we should do is validation of data, after validating we should encrypt the password and then save it in database
 
 15min - To encrypt password we will use a package bcrypt
