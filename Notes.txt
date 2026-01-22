@@ -172,6 +172,8 @@ app.js
   })
   .catch((err) => console.log("Failed to connect to the database"));
 
+  _id and __v are automatically added by mongodb when we create a new document
+
 
 -------------------------------------------------
 
