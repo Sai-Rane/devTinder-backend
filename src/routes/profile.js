@@ -21,6 +21,7 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
 
     const loggedInUser = req.user;
 
+    // for below logic refer episode 11 at 1hr 35 min
     Object.keys(req.body).forEach((key) => (loggedInUser[key] = req.body[key]));
 
     await loggedInUser.save(); //save the changes to the database

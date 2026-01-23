@@ -1,16 +1,16 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-const adminAuth = (req, res, next) => {
-  console.log("auth is getting checked");
-  const token = "dasjkd";
-  const isAdminAuthorized = token === "dasjkd";
-  if (!isAdminAuthorized) {
-    res.status(401).send("Unauthorized access");
-  } else {
-    next();
-  }
-};
+// const adminAuth = (req, res, next) => {
+//   console.log("auth is getting checked");
+//   const token = "dasjkd";
+//   const isAdminAuthorized = token === "dasjkd";
+//   if (!isAdminAuthorized) {
+//     res.status(401).send("Unauthorized access");
+//   } else {
+//     next();
+//   }
+// };
 
 const userAuth = async (req, res, next) => {
   // the job of this middleware is to read the token from the req cookies
@@ -22,6 +22,7 @@ const userAuth = async (req, res, next) => {
     }
 
     const decodedObj = await jwt.verify(token, "DEV@Tinder$790");
+    console.log("decoded", decodedObj);
 
     const { _id } = decodedObj;
 
@@ -37,6 +38,6 @@ const userAuth = async (req, res, next) => {
 };
 
 module.exports = {
-  adminAuth,
+  // adminAuth,
   userAuth,
 };

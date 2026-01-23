@@ -74,7 +74,6 @@ userSchema.methods.getJWT = async function () {
   const token = await jwt.sign({ _id: user?._id }, "DEV@Tinder$790", {
     expiresIn: "7d",
   }); //DEV@Tinder$790 is the secret key
-  console.log("token", token);
 
   return token;
 };
