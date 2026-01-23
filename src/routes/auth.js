@@ -5,6 +5,10 @@ const bcrypt = require("bcrypt");
 
 const authRouter = express.Router(); //this is how we create a router
 
+// authRouter.post() is same as app.post()
+// but here we are using router instead of app
+// so we can use this router in other files
+
 authRouter.post("/signup", async (req, res) => {
   //Validation of data
   validateSignUpData(req);

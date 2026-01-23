@@ -1,6 +1,5 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
-const User = require("./models/user");
 const cookieParser = require("cookie-parser");
 
 const app = express(); //instance of express js application

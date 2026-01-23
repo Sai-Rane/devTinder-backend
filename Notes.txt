@@ -248,10 +248,15 @@ Handling routing using proper way i.e by using Express Router
 
 
 example:
-auth router will handle
+authRouter, will handle auth related requests
 -POST /signup
 -POST /login
+-POST /logout
 
-profile router will handle
+profileRouter, will handle profile related requests
 -GET /profile/view
 -PATCH /profile/edit
+
+userRouter, will handle user related requests
+-GET /user/connections
+-GET /user/requests
