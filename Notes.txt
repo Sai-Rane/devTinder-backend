@@ -260,3 +260,17 @@ profileRouter, will handle profile related requests
 userRouter, will handle user related requests
 -GET /user/connections
 -GET /user/requests
+
+----------------------------------------------------
+
+Season 2 Episode 12
+
+45 min : Writing query in mongoDB
+1hr 3 min : Creating Schema Validations
+1hr 17 min : How to put an Index in your DB
+Suppose there are 1000 people using your app, and these 1000people are sending connection request to each other,your collection will grow and queries will become expensive(slow)
+When you index your DB your API becomes faster
+In your auth,js file, you are finding the user by email, so you should put an index on email field
+In MongoDB if you are making a field as unique, MongoDB will automatically create a index for that
+
+For Compound Index: 1 means ascending order and -1 means descending order
