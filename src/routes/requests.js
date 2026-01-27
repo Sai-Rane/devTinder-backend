@@ -77,4 +77,46 @@ requestsRouter.post(
   },
 );
 
+requestsRouter.post(
+  "/request/review/:status/:requestID",
+  userAuth,
+  async (req, res) => {
+    // if Virat ======> Elon
+    // check if the loggedInUser is Elon i.e loggedInUserId = toUserId
+    // the status should be interested
+    // validate the status (it should not be apart from accept or reject)
+    // check if the toUserId is valid
+    try {
+      const loggedInUser = req.user;
+      const { status, requestId } = req.params;
+      const allowedStatus = ["accepted", "rejected"];
+      if (!allowedStatus.includes(status)) {
+        return res
+          .status(400)
+          .json({ message: "Invalid status type " + req.params.status });
+      }
+
+      const connectionRequest = await ConnectionRequest.findOne({
+        _id: requestId,
+        toUserId: loggedInUser._id, // this is making sure that the loggedInUser is accepting the request
+        status: "interested", // this is making sure that the request is interested
+      });
+      if (!connectionRequest) {
+        res.status(404).json({ message: "Connection request not found" });
+      }
+
+      connectionRequest.status = status;
+      const data = await connectionRequest.save();
+      res.json({
+        message: "Connection request reviewed successfully",
+        data: data,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send("Error reviewing connection request" + error.message);
+    }
+  },
+);
+
 module.exports = requestsRouter;

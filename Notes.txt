@@ -274,3 +274,9 @@ In your auth,js file, you are finding the user by email, so you should put an in
 In MongoDB if you are making a field as unique, MongoDB will automatically create a index for that
 
 For Compound Index: 1 means ascending order and -1 means descending order
+
+-------------------------------------------------------
+
+Season 2 Episode 13
+
+Writing API for accepting and rejecting a connection request
