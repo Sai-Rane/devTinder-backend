@@ -71,17 +71,18 @@ requestsRouter.post(
         data: data,
       });
     } catch (error) {
-      console.log("first");
+      console.error(error);
       res.status(400).send("Error sending connection request" + error.message);
     }
   },
 );
 
+//below api is for accepted and rejected
 requestsRouter.post(
-  "/request/review/:status/:requestID",
+  "/request/review/:status/:requestId",
   userAuth,
   async (req, res) => {
-    // if Virat ======> Elon
+    // if Virat is sending a request to Elon ======> Elon
     // check if the loggedInUser is Elon i.e loggedInUserId = toUserId
     // the status should be interested
     // validate the status (it should not be apart from accept or reject)
@@ -97,12 +98,14 @@ requestsRouter.post(
       }
 
       const connectionRequest = await ConnectionRequest.findOne({
-        _id: requestId,
+        _id: requestId, //to check this requestId exists in DB
         toUserId: loggedInUser._id, // this is making sure that the loggedInUser is accepting the request
         status: "interested", // this is making sure that the request is interested
       });
       if (!connectionRequest) {
-        res.status(404).json({ message: "Connection request not found" });
+        return res
+          .status(404)
+          .json({ message: "Connection request not found" });
       }
 
       connectionRequest.status = status;

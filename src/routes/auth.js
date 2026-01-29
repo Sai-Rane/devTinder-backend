@@ -61,7 +61,7 @@ authRouter.post("/login", async (req, res) => {
         },
         { httpOnly: true },
       );
-      res.send("Login Successfull");
+      res.json({ message: "Login Successfull", data: user });
     } else {
       throw new Error("Incorrect Password");
     }
@@ -77,7 +77,9 @@ authRouter.post("/logout", (req, res) => {
       httpOnly: true,
     });
     res.send("Logout Successfull");
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).send("Error logging out " + error.message);
+  }
 });
 
 module.exports = authRouter;

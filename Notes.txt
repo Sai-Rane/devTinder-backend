@@ -280,3 +280,5 @@ For Compound Index: 1 means ascending order and -1 means descending order
 Season 2 Episode 13
 
 Writing API for accepting and rejecting a connection request
+39 min - Starting with User routes
+56 min - Building realtion between 2 collections
