@@ -282,3 +282,17 @@ Season 2 Episode 13
 Writing API for accepting and rejecting a connection request
 39 min - Starting with User routes
 56 min - Building realtion between 2 collections
+
+-------------------------------------------------------
+
+Season 2 Episode 14
+
+43 min - Pagination concept
+/feed?page=1&limit=10 returns first 10 users 1-10
+/feed?page=2&limit=10 returns next 10 users 11-20
+
+in mongoDB we have two functions for this , skip() and limit()
+example: skip(0).limit(10) returns first 10 users
+
+/feed/:id ----> this is params
+/feed?page=1&limit=10 ----> this is query

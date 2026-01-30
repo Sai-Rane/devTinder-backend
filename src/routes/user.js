@@ -60,6 +60,10 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
+    const page = parseInt(req.query.page) || 1;
+    let limit = parseInt(req.query.limit) || 10;
+    limit = limit > 50 ? 50 : limit;
+    const skip = (page - 1) * limit;
 
     //lets build logic of this API
     // suppose you have loggedIn by Virat, then virat should see all the cards of user whom Virat has not sent friend(connection) request
@@ -99,7 +103,10 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         { _id: { $nin: Array.from(hideUsersFromFeed) } },
         { _id: { $ne: loggedInUser._id } },
       ],
-    }).select(USER_SAFE_DATA); //select sends the fields only that you want
+    })
+      .select(USER_SAFE_DATA)
+      .skip(skip)
+      .limit(limit); //select sends the fields only that you want
     res.send(users);
   } catch (error) {
     res.status(400).json({ message: "error", error: error });
