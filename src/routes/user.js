@@ -107,7 +107,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
       .select(USER_SAFE_DATA)
       .skip(skip)
       .limit(limit); //select sends the fields only that you want
-    res.send(users);
+    res.json({ message: "success", data: users });
   } catch (error) {
     res.status(400).json({ message: "error", error: error });
   }
