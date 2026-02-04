@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 // const adminAuth = (req, res, next) => {
-//   console.log("auth is getting checked");
 //   const token = "dasjkd";
 //   const isAdminAuthorized = token === "dasjkd";
 //   if (!isAdminAuthorized) {
@@ -18,7 +17,7 @@ const userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
     if (!token) {
-      throw new Error("Token is not valid");
+      return res.status(401).send("Inavlid token");
     }
 
     const decodedObj = await jwt.verify(token, "DEV@Tinder$790");

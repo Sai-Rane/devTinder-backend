@@ -13,7 +13,6 @@ requestsRouter.post(
     try {
       const fromUserId = req.user._id;
       const toUserId = req.params.toUserId;
-      console.log("toUserId", toUserId);
       const status = req.params.status;
 
       const allowedStatus = ["ignored", "interested"];
@@ -33,7 +32,6 @@ requestsRouter.post(
 
       //checking if the toUserID exists in my DB
       const toUser = await User.findById(toUserId);
-      console.log("toUser", toUser);
       if (!toUser) {
         return res.status(404).json({ message: "User not found" });
       }
